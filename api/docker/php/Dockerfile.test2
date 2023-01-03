@@ -1,0 +1,19 @@
+ARG ALPINE_VERSION=3.16.3
+
+FROM alpine:${ALPINE_VERSION}
+
+RUN apk update && apk upgrade \
+    && apk add --no-cache \
+        php8 \
+        php8-fpm
+#        \
+#        ... install other libraries \
+#        ...
+
+CMD ["/usr/sbin/php-fpm8", "-R", "--nodaemonize"]
+
+EXPOSE 9000
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/app

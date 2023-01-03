@@ -1,0 +1,53 @@
+.FlexContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px 0;
+    min-height: 100vh;
+}
+
+.FormContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px 0;
+    padding: 20px;
+}
+
+.FormLabel {
+    font-size: 18px;
+    color: rgb(16 ,12, 8);
+}
+
+.FormInput {
+    font-size: 18px;
+    color: rgb(70, 70, 72);
+    border: 1px solid rgb(8, 8, 8);
+    padding: 5px;
+}
+
+.FormErrors {
+    font-size: 18px;
+    color: rgb(170, 20, 25);
+}
+
+.FormButton {
+    font-size: 18px;
+    background-color: rgb(8, 8, 8);
+    color: rgb(248, 248, 255);
+    border: 2px solid rgb(8, 8, 8);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.Response {
+    font-size: 18px;
+    color: rgb(16 ,12, 8);
+}
+
+.ResponseError {
+    font-size: 18px;
+    color: rgb(170, 20, 25);
+}
