@@ -1,0 +1,100 @@
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Zadanie 1
+    # 1) plik Dockerfile przygotowany w punkcie 2A ma być podstawą do
+    # zbudowania obrazy na węźle (runner) z systemem operacyjnym Ubuntu 20.04,
+    runs-on: ubuntu-20.04
+    strategy:
+      services:
+        include:
+          - context: ./api
+            dockerfile: ./docker/php/Dockerfile
+            name: zadanie1_php
+          - context: ./api
+            dockerfile: ./docker/nginx/Dockerfile
+            name: zadanie1_api
+          - context: ./client
+            dockerfile: ./docker/nginx/Dockerfile
+            name: zadanie1_client
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2) proces budowy obrazu zrealizowany ma być w oparciu o silnik buildkit,
+
+      # Skonfigurowanie dockera + buildx
+      - name: Buildx set-up
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          driver-opts: |
+            image=moby/buildkit:latest
+            network=host
+
+      # Instalacja QEMU (opcjonalnie)
+      - name: Docker Setup QEMU
+        uses: docker/setup-qemu-action@v2
+
+      # Logowanie do Dockerhub
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      # 3) obrazy mają umożliwić uruchomienie aplikacji FibCalc
+      # na komputerach z procesorami 64-bitowymi Intel oraz Apple M1,
+
+      # Zbudowanie i wypchniecie obrazu na Dockerhub
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64,linux/arm64/v8
+          context: ${{ services.context }}
+          file: ${{ services.dockerfile }}
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ services.name }}:latest
+
+#      # Zbudowanie i wypchniecie obrazu PHP na Dockerhub
+#      - name: Build and push - PHP Image
+#        uses: docker/build-push-action@v3
+#        with:
+#          platforms: linux/amd64,linux/arm64,linux/arm64/v8
+#          context: ./api
+#          file: ./docker/php/Dockerfile
+#          push: true
+#          tags: |
+#            ${{secrets.DOCKER_HUB_USERNAME}}/zadanie1_php:latest
+#
+#      # Zbudowanie i wypchniecie obrazu API na Dockerhub
+#      - name: Build and push - API Image
+#        uses: docker/build-push-action@v3
+#        with:
+#          platforms: linux/amd64,linux/arm64,linux/arm64/v8
+#          context: ./api
+#          file: ./docker/nginx/Dockerfile
+#          push: true
+#          tags: |
+#            ${{secrets.DOCKER_HUB_USERNAME}}/zadanie1_api:latest
+#
+#      # Zbudowanie i wypchniecie obrazu Client na Dockerhub
+#      - name: Build and push - Client Image
+#        uses: docker/build-push-action@v3
+#        with:
+#          platforms: linux/amd64,linux/arm64,linux/arm64/v8
+#          context: ./client
+#          file: ./docker/nginx/Dockerfile
+#          push: true
+#          tags: |
+#            ${{secrets.DOCKER_HUB_USERNAME}}/zadanie1_client:latest
+      
