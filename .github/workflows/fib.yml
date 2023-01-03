@@ -13,7 +13,7 @@ jobs:
     # zbudowania obrazy na węźle (runner) z systemem operacyjnym Ubuntu 20.04,
     runs-on: ubuntu-20.04
     strategy:
-      services:
+      matrix:
         include:
           - context: ./api
             dockerfile: ./docker/php/Dockerfile
@@ -59,11 +59,11 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64,linux/arm64,linux/arm64/v8
-          context: ${{ services.context }}
-          file: ${{ services.dockerfile }}
+          context: ${{ matrix.context }}
+          file: ${{ matrix.dockerfile }}
           push: true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ services.name }}:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ matrix.name }}:latest
 
 #      # Zbudowanie i wypchniecie obrazu PHP na Dockerhub
 #      - name: Build and push - PHP Image
