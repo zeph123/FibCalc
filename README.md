@@ -54,15 +54,15 @@ gh repo create FibCalc --public --remote=FibCalc --source=. --push
 
 Efekt działania wykonanych poleceń:
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_1.png"/>
+<img alt="git_1.png" src="./screenshots/git_1.png"/>
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_2.png"/>
+<img alt="git_2.png" src="./screenshots/git_2.png"/>
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_3.png"/>
+<img alt="git_3.png" src="./screenshots/git_3.png"/>
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_4.png"/>
+<img alt="git_4.png" src="./screenshots/git_4.png"/>
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_5.png"/>
+<img alt="git_5.png" src="./screenshots/git_5.png"/>
 
 ## Ad p.2
 Aplikacja FibCalc składa się z dwóch oddzielnych aplikacji:
@@ -86,36 +86,18 @@ docker-compose up -d
 
 Efekt działania wykonanego polecenia:
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_1.png"/>
+<img alt="docker_1.png" src="./screenshots/docker_1.png"/>
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_2.png"/>
+<img alt="docker_2.png" src="./screenshots/docker_2.png"/>
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_3.png"/>
+<img alt="docker_3.png" src="./screenshots/docker_3.png"/>
 
 Działanie aplikacji:
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_4.png"/>
+<img alt="docker_4.png" src="./screenshots/docker_4.png"/>
 
-<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_5.png"/>
+<img alt="docker_5.png" src="./screenshots/docker_5.png"/>
 
+## Ad p.3
 
-Zawartość sprawozdania:
-
-Ad. p1. Należy podać link do repozytorium publicznego na GitHub, krótkie omówienie
-algorytmu wykorzystanego w programie FibCalc oraz listę poleceń tworzących
-środowisko pracy na GitHub z efektem ich działania.
-
-Ad. p2. Należy podać polecenia do zbudowania obrazu, jego uruchomienia wraz z
-efektami ich działania oraz dowód na poprawność działania aplikacji z założeniami z
-punktu 1.
-
-Ad. p3. Wystarczy sam plik fib.yml na repozytorium GitHub oraz krótki opis przyjętej
-realizacji nazewnictwa obrazów zgodnie z metodą semver oraz zasady wykorzystania
-repo ghcr.io w pliku fib.yml.
-
-Ad. p4. Należy podać wszystkie wykorzystane polecenia wraz z efektami ich działania.
-Opracowany workflow należy uruchomić minimum dwa razy i na tej podstawie
-przedstawić dowód na poprawne działanie cache oraz automatycznego generowania
-nazw obrazów zgodnie z założeniami w p. 3. Dodatkowo należy podać link do
-repozytorium publicznego na ghcr.io oraz do repozytorium publicznego na docker.io,
-które wykorzystywane były w pliku ib.yml
+## Ad p.4
