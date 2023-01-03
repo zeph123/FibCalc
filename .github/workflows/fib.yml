@@ -16,13 +16,13 @@ jobs:
       matrix:
         include:
           - context: ./api
-            dockerfile: ./docker/php/Dockerfile
+            dockerfile: ./api/docker/php/Dockerfile
             name: php
           - context: ./api
-            dockerfile: ./docker/nginx/Dockerfile
+            dockerfile: ./api/docker/nginx/Dockerfile
             name: api
           - context: ./client
-            dockerfile: ./docker/nginx/Dockerfile
+            dockerfile: ./client/docker/nginx/Dockerfile
             name: client
 
     steps:
@@ -55,7 +55,7 @@ jobs:
       # na komputerach z procesorami 64-bitowymi Intel oraz Apple M1,
 
       # Zbudowanie i wypchniecie obrazu na Dockerhub
-      - name: Build and push
+      - name: Build and push image
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64,linux/arm64/v8
@@ -64,4 +64,3 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-latest
-      
