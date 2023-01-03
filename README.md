@@ -23,7 +23,7 @@ Fn = phi ** n / sqrt(5)
 Symbol ** oznacza potęgowanie, phi jest podstawą, a n wykładnikiem potęgowania
 ```
 
-Lista poleceń tworzących środowisko pracy na GitHub z efektem ich działania.
+Lista poleceń tworzących środowisko pracy na GitHub.
 
 Inicjalizacja repozytorium:
 ```
@@ -52,16 +52,53 @@ Inicjalizacja repozytorium cd.:
 gh repo create FibCalc --public --remote=FibCalc --source=. --push
 ```
 
+Efekt działania wykonanych poleceń:
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_1.png"/>
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_2.png"/>
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_3.png"/>
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_4.png"/>
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\git_5.png"/>
+
 ## Ad p.2
-Do zbudowania obrazów dla tego projektu, zastosowano następujące polecenie:
+Aplikacja FibCalc składa się z dwóch oddzielnych aplikacji:
+* backendowej - aplikacja Symfony (w języku PHP),
+* frontenowej - aplikacja React (w języku JavaScript).
+
+Do działania wykorzystuje trzy serwisy:
+* serwer API, wykorzystujący serwer Nginx, który serwuje backend aplikacji,
+* serwer PHP, wykorzystany jako język programowania do działania aplikacji backendowej,
+* serwer Client, wykorzystujący serwer Nginx, który serwuje frontend aplikacji.
+
+Do budowy obrazów poszczególnych serwisów wykorzystano oddzielne pliki Dockerfile
+wraz z plikami konfiguracyjnymi dla każdego z serwisów. Serwisy zostały zdefiniowane 
+w pliku docker-compose.yml.
+
+Do zbudowania obrazów serwisów i ich uruchomienia, zastosowano następujące polecenie:
+
+```
+docker-compose up -d
+```
+
+Efekt działania wykonanego polecenia:
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_1.png"/>
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_2.png"/>
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_3.png"/>
+
+Działanie aplikacji:
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_4.png"/>
+
+<img src="C:\Users\zygmu\Desktop\zadanie1\screenshots\docker_5.png"/>
 
 
-
-Aby zbudować obraz dockera tego projektu, wykonaj poniższe polecenia:
-
-
-
-W każdym wypadku opis rozwiązania należy wgrać do przygotowanego katalogu na moodle.
 Zawartość sprawozdania:
 
 Ad. p1. Należy podać link do repozytorium publicznego na GitHub, krótkie omówienie
@@ -82,22 +119,3 @@ przedstawić dowód na poprawne działanie cache oraz automatycznego generowania
 nazw obrazów zgodnie z założeniami w p. 3. Dodatkowo należy podać link do
 repozytorium publicznego na ghcr.io oraz do repozytorium publicznego na docker.io,
 które wykorzystywane były w pliku ib.yml
-
-
-
-## General info
-This project is about dockerizing a simple Node.js web app.
-
-## Build image
-To build docker image of this project, execute commands below:
-
-```
-$ docker build -t local/simple-web-app -f Dockerfile .
-```
-
-## Setup
-To run this project, execute commands below:
-
-```
-$ docker run -d --rm -p 8080:8080 --name simple-web-app local/simple-web-app
-```

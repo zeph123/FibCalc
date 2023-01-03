@@ -12,7 +12,7 @@ let schema = yup.object().shape({
     .typeError('Index must be a number')
     .integer("Index must be an integer.")
     .min(0, "Index must be greater than or equal to 0.")
-    .max(150, "Index must be less than or equal to 150.")
+    .max(70, "Index must be less than or equal to 70.")
     .required("Index is required.")
 });
 
