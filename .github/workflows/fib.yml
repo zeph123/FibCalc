@@ -59,7 +59,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64,linux/arm64,linux/arm64/v8
-          context: .
+          context: ./api
           file: ./api/docker/php/Dockerfile
           push: true
           tags: |
