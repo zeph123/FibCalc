@@ -12,18 +12,18 @@ jobs:
     # 1) plik Dockerfile przygotowany w punkcie 2A ma być podstawą do
     # zbudowania obrazy na węźle (runner) z systemem operacyjnym Ubuntu 20.04,
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        include:
-          - context: ./api
-            dockerfile: ./docker/php/Dockerfile
-            name: zadanie1_php
-          - context: ./api
-            dockerfile: ./docker/nginx/Dockerfile
-            name: zadanie1_api
-          - context: ./client
-            dockerfile: ./docker/nginx/Dockerfile
-            name: zadanie1_client
+#    strategy:
+#      matrix:
+#        include:
+#          - context: ./api
+#            dockerfile: ./docker/php/Dockerfile
+#            name: zadanie1_php
+#          - context: ./api
+#            dockerfile: ./docker/nginx/Dockerfile
+#            name: zadanie1_api
+#          - context: ./client
+#            dockerfile: ./docker/nginx/Dockerfile
+#            name: zadanie1_client
 
     steps:
       - name: Checkout code
@@ -59,11 +59,11 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64,linux/arm64,linux/arm64/v8
-          context: ${{ matrix.context }}
-          file: ${{ matrix.dockerfile }}
+          context: ./api
+          file: ./docker/php/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ matrix.name }}:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1_php:latest
 
 #      # Zbudowanie i wypchniecie obrazu PHP na Dockerhub
 #      - name: Build and push - PHP Image
