@@ -12,18 +12,18 @@ jobs:
     # 1) plik Dockerfile przygotowany w punkcie 2A ma być podstawą do
     # zbudowania obrazy na węźle (runner) z systemem operacyjnym Ubuntu 20.04,
     runs-on: ubuntu-20.04
-#    strategy:
-#      matrix:
-#        include:
-#          - context: ./api
-#            dockerfile: ./docker/php/Dockerfile
-#            name: zadanie1_php
-#          - context: ./api
-#            dockerfile: ./docker/nginx/Dockerfile
-#            name: zadanie1_api
-#          - context: ./client
-#            dockerfile: ./docker/nginx/Dockerfile
-#            name: zadanie1_client
+    strategy:
+      matrix:
+        include:
+          - context: ./api
+            dockerfile: ./docker/php/Dockerfile
+            name: php
+          - context: ./api
+            dockerfile: ./docker/nginx/Dockerfile
+            name: api
+          - context: ./client
+            dockerfile: ./docker/nginx/Dockerfile
+            name: client
 
     steps:
       - name: Checkout code
@@ -58,44 +58,10 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          # linux/arm64
           platforms: linux/amd64,linux/arm64/v8
-          context: ./api
-          file: ./api/docker/php/Dockerfile
+          context: ${{ matrix.context }}
+          file: ${{ matrix.dockerfile }}
           push: true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1_php:latest
-
-#      # Zbudowanie i wypchniecie obrazu PHP na Dockerhub
-#      - name: Build and push - PHP Image
-#        uses: docker/build-push-action@v3
-#        with:
-#          platforms: linux/amd64,linux/arm64,linux/arm64/v8
-#          context: ./api
-#          file: ./docker/php/Dockerfile
-#          push: true
-#          tags: |
-#            ${{secrets.DOCKER_HUB_USERNAME}}/zadanie1_php:latest
-#
-#      # Zbudowanie i wypchniecie obrazu API na Dockerhub
-#      - name: Build and push - API Image
-#        uses: docker/build-push-action@v3
-#        with:
-#          platforms: linux/amd64,linux/arm64,linux/arm64/v8
-#          context: ./api
-#          file: ./docker/nginx/Dockerfile
-#          push: true
-#          tags: |
-#            ${{secrets.DOCKER_HUB_USERNAME}}/zadanie1_api:latest
-#
-#      # Zbudowanie i wypchniecie obrazu Client na Dockerhub
-#      - name: Build and push - Client Image
-#        uses: docker/build-push-action@v3
-#        with:
-#          platforms: linux/amd64,linux/arm64,linux/arm64/v8
-#          context: ./client
-#          file: ./docker/nginx/Dockerfile
-#          push: true
-#          tags: |
-#            ${{secrets.DOCKER_HUB_USERNAME}}/zadanie1_client:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-latest
       
