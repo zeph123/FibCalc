@@ -196,7 +196,6 @@ docker-compose -f docker-compose.dev.yml up -d
 
 Uruchomienie workflow:
 
-
 ## Links
 
 Linki do repozytorium publicznego na docker.io (DockerHub)
