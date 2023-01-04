@@ -86,6 +86,8 @@ jobs:
 #          images: |
 #            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1_${{ matrix.service_name }}
 #            ghcr.io/${{ github.repository_owner }}/zadanie1_${{ matrix.service_name }}
+          images: |
+            name=
           # {{version}} = {{major}}.{{minor}}.{{patch}}
           tags: |
             type=ref,event=branch
