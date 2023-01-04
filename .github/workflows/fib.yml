@@ -67,6 +67,9 @@ jobs:
       # na komputerach z procesorami 64-bitowymi Intel oraz Apple M1,
       # 4) obrazy mają być zgodne ze specyfikacją OCI.
 
+      # C: W trakcie budowania obrazów należy wykorzystywać informacje cache w trybie
+      # registry a docelowym repozytorium ma być publiczne repo studenta na DockerHub.
+
       # Zbudowanie i wypchniecie obrazu na Dockerhub
       - name: Build and push image
         uses: docker/build-push-action@v3
@@ -78,3 +81,5 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-latest
             ghcr.io/${{ github.repository_owner }}/zadanie1:${{ matrix.name }}-latest
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-buildcache,mode=max
