@@ -90,8 +90,6 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,prefix=pr-,event=pr
-            type=semver,pattern={{major}}
-            type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{version}}
 
       # Zbudowanie i wypchniecie obrazu na Dockerhub, GitHub Container Registry
