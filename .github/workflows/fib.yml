@@ -84,8 +84,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1/${{ matrix.service_name }}
-            ghcr.io/${{ github.repository_owner }}/zadanie1/${{ matrix.service_name }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1-${{ matrix.service_name }}
+            ghcr.io/${{ github.repository_owner }}/zadanie1-${{ matrix.service_name }}
           # {{version}} = {{major}}.{{minor}}.{{patch}}
           tags: |
             type=ref,event=branch
@@ -104,6 +104,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1/${{ matrix.service_name }}:cache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1/${{ matrix.service_name }}:cache,mode=max
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1-${{ matrix.service_name }}:cache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1-${{ matrix.service_name }}:cache,mode=max
 
