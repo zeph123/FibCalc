@@ -194,6 +194,16 @@ Do uruchomienia serwisów wykorzystano polecenie:
 docker-compose -f docker-compose.dev.yml up -d
 ```
 
+Uruchomienie serwisów:
+
+<img alt="ad4_docker_compose_1.png" src="./screenshots/ad4_docker_compose_1.png"/>
+
+<img alt="ad4_docker_compose_2.png" src="./screenshots/ad4_docker_compose_2.png"/>
+
+<img alt="ad4_docker_compose_3.png" src="./screenshots/ad4_docker_compose_3.png"/>
+
+<img alt="ad4_docker_compose_4.png" src="./screenshots/ad4_docker_compose_4.png"/>
+
 Uruchomienie workflow:
 
 <img alt="ad4_gh_workflow_result_1.png" src="./screenshots/ad4_gh_workflow_result_1.png"/>
