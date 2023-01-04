@@ -123,19 +123,10 @@ zachowaniu kompatybilności wstecznej.
 
 Zasady wersjonowania opisane zostały na stronie: https://semver.org/lang/pl/.
 
-
-
-
-
-
-
-
-
-Ad. p3. Wystarczy sam plik fib.yml na repozytorium GitHub oraz krótki opis 
-przyjętej realizacji nazewnictwa obrazów zgodnie z metodą semver oraz 
-zasady wykorzystania repo ghcr.io w pliku fib.yml.
-
-D: W pliku fib.yml należy zdeklarować i wykorzystać zasadę nazywania budowanych
-# obrazów według metody.
+Wypchniecie obrazu na GitHub Container Registry odbywa się w trzech krokach:
+* zalogowanie do GitHub Container Registry,
+* wyodrębnienie metadanych - użycie obrazu z repozytorium ghcr jako bazowej nazwy
+obrazu do tagowania,
+* zbudowanie i wypchniecie obrazu do repozytorium GitHub Container Registry.
 
 ## Ad p.4

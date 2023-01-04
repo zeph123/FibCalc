@@ -84,15 +84,17 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1
-            ghcr.io/${{ github.repository_owner }}/zadanie1
+            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.service_name }}
+            ghcr.io/${{ github.repository_owner }}/zadanie1:${{ matrix.service_name }}
           # {{version}} = {{major}}.{{minor}}.{{patch}}
           tags: |
-            type=semver,pattern=${{ matrix.service_name }}-{{major}}
-            type=semver,pattern=${{ matrix.service_name }}-{{major}}.{{minor}}
-            type=semver,pattern=${{ matrix.service_name }}-{{version}}
+            type=ref,event=branch
+            type=ref,prefix=pr-,event=pr
+            type=semver,pattern={{major}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{version}}
 
-      # Zbudowanie i wypchniecie obrazu na Dockerhub
+      # Zbudowanie i wypchniecie obrazu na Dockerhub, GitHub Container Registry
       - name: Build and push image
         uses: docker/build-push-action@v3
         with:
@@ -102,6 +104,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.service_name }}-buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.service_name }}-buildcache,mode=max
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.service_name }}-cache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.service_name }}-cache,mode=max
 
