@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   api:
-    image: 01234ab909f/zadanie1-api:main
+    image: 01234ab909f/zadanie1-api:latest
     container_name: api
     restart: unless-stopped
     platform: linux/amd64
@@ -18,7 +18,7 @@ services:
       - app_network
 
   php:
-    image: 01234ab909f/zadanie1-php:main
+    image: 01234ab909f/zadanie1-php:latest
     container_name: php
     restart: unless-stopped
     platform: linux/amd64
@@ -30,7 +30,7 @@ services:
       - app_network
 
   client:
-    image: 01234ab909f/zadanie1-client:main
+    image: 01234ab909f/zadanie1-client:latest
     container_name: client
     restart: unless-stopped
     platform: linux/amd64
