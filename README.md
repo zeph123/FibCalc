@@ -7,6 +7,7 @@
 * [Ad p.2](#ad-p2)
 * [Ad p.3](#ad-p3)
 * [Ad p.4](#ad-p4)
+* [Links](#links)
 
 ## Ad p.1
 W programie FibCalc do obliczenia wartości n-tego wyrazu ciągu Fibonacciego 
@@ -133,7 +134,7 @@ obrazu do tagowania,
 
 Za pomocą narzędzia gh należy:
 
-A : Sprawdzić obecność pliku fib.yml jako opisu workflow w GitHub Action.
+A: Sprawdzić obecność pliku fib.yml jako opisu workflow w GitHub Action.
 
 Użyte polecenia:
 ```
@@ -149,8 +150,61 @@ Efekt działania wykonanych poleceń:
 B: Uruchomić GitHub Action i potwierdzić poprawność działania opracowanego
 rozwiązania.
 
+Użyte polecenia:
+```
+gh workflow list
+gh workflow run 44486371
+gh run list
+gh run watch 3839132738
+```
+
+Efekt działania wykonanych poleceń:
+
+<img alt="gh_commands_2.png" src="./screenshots/gh_commands_2.png"/>
+
+<img alt="gh_commands_3.png" src="./screenshots/gh_commands_3.png"/>
+
+C: Pobrać wybrany obraz (obraz na architekturę wykorzystywaną na swoim 
+komputerze) i uruchomić kontener z opracowaną aplikacją. 
+Potwierdzić poprawność działania aplikacji. 
+
+Użyte polecenia do pobrania obrazów i sprawdzenia architektur:
+```
+docker pull 01234ab909f/zadanie1-php:main --platform=linux/amd64
+docker inspect 01234ab909f/zadanie1-php:main
+
+docker pull 01234ab909f/zadanie1-api:main --platform=linux/amd64
+docker inspect 01234ab909f/zadanie1-api:main
+
+docker pull 01234ab909f/zadanie1-client:main --platform=linux/amd64
+docker inspect 01234ab909f/zadanie1-client:main
+```
+
+Sprawdzenie architektur podobnie dla każdego obrazu, w tym przypadku dla 
+obrazu 01234ab909f/zadanie1-php:main:
+
+<img alt="ad4_docker_1.png" src="./screenshots/ad4_docker_1.png"/>
+
+Serwisy wykorzystują zbudowane obrazy pobrane z repozytorium
+publicznego na docker.io (DockerHub), dlatego też zostały zdefiniowane
+na nowo w pliku docker-compose.dev.yml.
+
+Do uruchomienia serwisów wykorzystano polecenie:
+```
+docker-compose -f docker-compose.dev.yml up -d
+```
+
+Uruchomienie workflow:
 
 
-C: Pobrać wybrany obraz (obraz na architekturę wykorzystywaną na swoim
-komputerze) i uruchomi kontener z opracowaną aplikacją. Potwierdzi poprawność
-działania aplikacji. 
+## Links
+
+Linki do repozytorium publicznego na docker.io (DockerHub)
+* PHP - https://hub.docker.com/r/01234ab909f/zadanie1-php
+* API - https://hub.docker.com/r/01234ab909f/zadanie1-api
+* Client - https://hub.docker.com/r/01234ab909f/zadanie1-client
+
+Linki do repozytorium publicznego na ghcr.io (GitHub Container Registry):
+* PHP - https://github.com/zeph123/FibCalc/pkgs/container/zadanie1-php
+* API - https://github.com/zeph123/FibCalc/pkgs/container/zadanie1-api
+* Client - https://github.com/zeph123/FibCalc/pkgs/container/zadanie1-client
