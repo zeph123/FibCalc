@@ -51,8 +51,21 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      # B: W ramach działania workflow GitHub Action należy zbudowane obrazy przesłać do
+      # swojego repozytorium PUBLICZNEGO na GitHub Packages (repo: ghcr.io).
+
+      # Logowanie do GitHub Container Registry
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          # W dokumentacji: GITHUB_TOKEN, ale GitHub nie zezwala na nazwę rozpoczynającą się od: GITHUB_
+          password: ${{ secrets.GIT_HUB_ACCESS_TOKEN }}
+
       # 3) obrazy mają umożliwić uruchomienie aplikacji FibCalc
       # na komputerach z procesorami 64-bitowymi Intel oraz Apple M1,
+      # 4) obrazy mają być zgodne ze specyfikacją OCI.
 
       # Zbudowanie i wypchniecie obrazu na Dockerhub
       - name: Build and push image
@@ -64,3 +77,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-latest
+            ghcr.io/${{ github.repository_owner }}/zadanie1:${{ matrix.name }}-latest
