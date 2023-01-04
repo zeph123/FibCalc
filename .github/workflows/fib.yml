@@ -5,6 +5,11 @@ on:
   push:
     branches:
       - main
+    tags:
+      - "v*.*.*"
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -17,13 +22,13 @@ jobs:
         include:
           - context: ./api
             dockerfile: ./api/docker/php/Dockerfile
-            name: php
+            service_name: php
           - context: ./api
             dockerfile: ./api/docker/nginx/Dockerfile
-            name: api
+            service_name: api
           - context: ./client
             dockerfile: ./client/docker/nginx/Dockerfile
-            name: client
+            service_name: client
 
     steps:
       - name: Checkout code
@@ -33,7 +38,6 @@ jobs:
 
       # Skonfigurowanie dockera + buildx
       - name: Buildx set-up
-        id: buildx
         uses: docker/setup-buildx-action@v2
         with:
           driver-opts: |
@@ -65,10 +69,28 @@ jobs:
 
       # 3) obrazy mają umożliwić uruchomienie aplikacji FibCalc
       # na komputerach z procesorami 64-bitowymi Intel oraz Apple M1,
+
       # 4) obrazy mają być zgodne ze specyfikacją OCI.
 
       # C: W trakcie budowania obrazów należy wykorzystywać informacje cache w trybie
       # registry a docelowym repozytorium ma być publiczne repo studenta na DockerHub.
+
+      # D: W pliku fib.yml należy zdeklarować i wykorzystać zasadę nazywania budowanych
+      # obrazów według metody.
+
+      # Wyodrębnienie metadanych
+      - name: Docker Metadata
+        id: metadata
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1
+            ghcr.io/${{ github.repository_owner }}/zadanie1
+          # {{version}} = {{major}}.{{minor}}.{{patch}}
+          tags: |
+            type=semver,pattern=${{ matrix.service_name }}-{{major}}
+            type=semver,pattern=${{ matrix.service_name }}-{{major}}.{{minor}}
+            type=semver,pattern=${{ matrix.service_name }}-{{version}}
 
       # Zbudowanie i wypchniecie obrazu na Dockerhub
       - name: Build and push image
@@ -77,9 +99,9 @@ jobs:
           platforms: linux/amd64,linux/arm64/v8
           context: ${{ matrix.context }}
           file: ${{ matrix.dockerfile }}
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-latest
-            ghcr.io/${{ github.repository_owner }}/zadanie1:${{ matrix.name }}-latest
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.name }}-buildcache,mode=max
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.service_name }}-buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/zadanie1:${{ matrix.service_name }}-buildcache,mode=max
+

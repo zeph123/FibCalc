@@ -100,4 +100,42 @@ Działanie aplikacji:
 
 ## Ad p.3
 
+Budowane obrazy Docker wypychane do repozytorium DockerHub oraz 
+GitHub Container Registry wydawane są zgodnie z zasadami wersjonowania 
+semantycznego (Semver).
+
+W oparciu o przyjętą konwencję nazewnictwa zbudowanych obrazów, wypychane
+będą z następującym tagiem mającym postać: nazwa_serwisu-MAJOR.MINOR.PATCH.
+Zastosowano następujący sposób ze względu na to, że wypychane obrazy są 
+przechowywane w tym samym repozytorium zarówno na DockerHub, jak i również na
+GitHub Container Registry.
+
+Dla DockerHub: user/app:nazwa_serwisu-MAJOR.MINOR.PATCH
+
+Dla GitHub Container Registry: ghcr.io/user/app:nazwa_serwisu-MAJOR.MINOR.PATCH
+
+W skrócie:
+* MAJOR, są to zmiany, które nie są niekompatybilne z API,
+* MINOR, są to zmiany związane z dodaniem nowej funkcjonalności, 
+która jest kompatybilna z poprzednimi wersjami,
+* PATCH, są to zmiany związane z naprawieniem błędu/błędów przy 
+zachowaniu kompatybilności wstecznej.
+
+Zasady wersjonowania opisane zostały na stronie: https://semver.org/lang/pl/.
+
+
+
+
+
+
+
+
+
+Ad. p3. Wystarczy sam plik fib.yml na repozytorium GitHub oraz krótki opis 
+przyjętej realizacji nazewnictwa obrazów zgodnie z metodą semver oraz 
+zasady wykorzystania repo ghcr.io w pliku fib.yml.
+
+D: W pliku fib.yml należy zdeklarować i wykorzystać zasadę nazywania budowanych
+# obrazów według metody.
+
 ## Ad p.4
