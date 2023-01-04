@@ -130,3 +130,27 @@ obrazu do tagowania,
 * zbudowanie i wypchniecie obrazu do repozytorium GitHub Container Registry.
 
 ## Ad p.4
+
+Za pomocą narzędzia gh należy:
+
+A : Sprawdzić obecność pliku fib.yml jako opisu workflow w GitHub Action.
+
+Użyte polecenia:
+```
+gh repo set-default
+gh workflow list
+gh workflow view 44486371
+```
+
+Efekt działania wykonanych poleceń:
+
+<img alt="gh_commands_1.png" src="./screenshots/gh_commands_1.png"/>
+
+B: Uruchomić GitHub Action i potwierdzić poprawność działania opracowanego
+rozwiązania.
+
+
+
+C: Pobrać wybrany obraz (obraz na architekturę wykorzystywaną na swoim
+komputerze) i uruchomi kontener z opracowaną aplikacją. Potwierdzi poprawność
+działania aplikacji. 
