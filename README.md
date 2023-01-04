@@ -196,6 +196,10 @@ docker-compose -f docker-compose.dev.yml up -d
 
 Uruchomienie workflow:
 
+<img alt="ad4_gh_workflow_result_1.png" src="./screenshots/ad4_gh_workflow_result_1.png"/>
+
+<img alt="ad4_gh_workflow_result_2.png" src="./screenshots/ad4_gh_workflow_result_2.png"/>
+
 ## Links
 
 Linki do repozytorium publicznego na docker.io (DockerHub)
